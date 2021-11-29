@@ -1,0 +1,50 @@
+{ "openapi":"3.0.0",
+    "info":{
+        "title":"Queensland Criminal Database API",
+        "description":"This is an example Express.js API based on the Queensland Government Crime Database",
+        "version":"1.0.0",
+        "termsOfService":"http://swagger.io/terms/",
+        "contact":{"portfolio website":"https://jacksonpeters.dev/"},
+        "license":{
+            "name":"Apache 2.0",
+            "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "servers":[
+        {
+            "url":"http://localhost:3000"
+        }
+    ],
+    "basePath":"/api",
+    "tags":[
+        { 
+            "name":"information",
+            "description":"General API description"
+          },
+          { 
+            "name":"query",
+            "description":"API queries based on council and other available parameters."
+          },
+          { 
+              "name":"updates",
+              "description":"Updates to Queensland Crimes Database information."
+            }
+    ],
+    "paths":{
+        "/api":{
+            "get":{
+                "tags":["information"],
+                "summary":"Simple Information Page",
+                "description":"Very Basic API Page",
+                "operationId":"apiHome",
+                "produces":["text/html"],
+                "responses":{
+                    "200":{
+                        "description":"successful operation"
+                    }
+                }
+            }
+        }
+    }
+
+}
