@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/api', function(req, res, next){
-  res.render('index', {title:"Several Routes will be available to browse the database"})
+  res.render('api', {title:"API Explanation"})
 })
 
 module.exports = router;

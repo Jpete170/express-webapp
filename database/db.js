@@ -1,4 +1,5 @@
-const mysql = require("mysql")
+//Unsure if continuing to use MySQL, or switch to MongoDB
+/*const mysql = require("mysql")
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -14,4 +15,4 @@ connection.connect(function(err){
 module.exports = (req, res, next) => {
     req.db = connection;
     next()
-}
+}*/

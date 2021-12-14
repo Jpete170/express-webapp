@@ -50,6 +50,7 @@ app.get('/knex', function(req, res, next){
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  res.render('index', {title: "Error 404 Occurred"})
   next(createError(404));
 });
 
