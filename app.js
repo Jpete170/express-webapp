@@ -3,9 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 //Constants
 const helmet = require('helmet')
 const cors = require('cors')
+
+//MongoDB Constants
+const {startDatabase} = require('./database/db')
+
 //Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -31,11 +36,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors())
+/*
 app.use((req, res, next) =>{
   req.db = knex;
   next()
 })
-
+*/
 //Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
