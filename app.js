@@ -1,21 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
 //Constants
 const helmet = require('helmet')
 const cors = require('cors')
-
-//MongoDB Constants
-const {startDatabase} = require('./database/db')
-
+const body_parser = require('body-parser')
+require('dotenv').config(); // This middleware allows the server to access ".env" files locally.
+//const pug = require('pug')
 //Routes
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+let indexRouter = require('./routes/index');
+//let usersRouter = require('./routes/users');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,37 +25,23 @@ app.use(helmet())
 const swaggerUI = require("swagger-ui-express")
 const swaggerDocument = require('./swagger.json')
 
-const options = require('./knex')
-const knex = require('knex')(options)
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(body_parser.json())
 
 app.use(cors())
-/*
-app.use((req, res, next) =>{
-  req.db = knex;
-  next()
-})
-*/
+
 //Routes
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
-
-app.get('/knex', function(req, res, next){
-  req.db.raw("SELECT VERSION()").then(
-    (version) = console.log((version[0][0]))
-  ).catch((err) => {console.log(err); throw err})
-  res.send("version logged successfully")
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.render('index', {title: "Error 404 Occurred"})
+  res.render('404', {title: "Error 404 Occurred"})
   next(createError(404));
 });
 

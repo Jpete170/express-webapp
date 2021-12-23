@@ -1,7 +1,7 @@
 { "openapi":"3.0.0",
     "info":{
-        "title":"Queensland Criminal Database API",
-        "description":"This is an example Express.js API based on the Queensland Government Crime Database",
+        "title":"MongoDB Sample API Databses",
+        "description":"This is an example Express.js API which uses data from the sample datasets provided by MongoDB",
         "version":"1.0.0",
         "termsOfService":"http://swagger.io/terms/",
         "contact":{"portfolio website":"https://jacksonpeters.dev/"},
