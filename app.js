@@ -13,6 +13,7 @@ require('dotenv').config(); // This middleware allows the server to access ".env
 //Routes
 let indexRouter = require('./routes/index');
 //let usersRouter = require('./routes/users');
+let airbnbRouter = require('./routes/airbnb')
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(cors())
 //Routes
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
+app.use('/airbnb', airbnbRouter)
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 // catch 404 and forward to error handler

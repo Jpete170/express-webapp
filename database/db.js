@@ -1,22 +1,23 @@
 const MongoClient = require("mongodb").MongoClient
+let DB = process.env.MONGO;
+const client = new MongoClient(DB,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 
-function getCollection(database, collection){
-   // let results = []; 
-    MongoClient.connect(`${process.env.MONGO}`, function(err, client){
-        if (err) throw err;
-
-        let db = client.db(database);
-
-        let results = db.collection(collection).find({
-            name: "Ribeira Charming Duplex",
-        }).toArray(function(err, result){
-            if (err) throw err;
-            
-        })
-    })   
-    //return results;
-}
+let _db; //instantiate database variable before exporting it.
 
 module.exports = {
-    getCollection,
+    serverConnection: function(callback){
+        client.connect(function(err, database){
+            if(database){
+                _db = database.client("sample_airbnb")
+                console.log("successful connection")
+            }
+            return callback(err);
+        })
+    },
+    getDB: function(){
+        return _db;
+    },
 };
