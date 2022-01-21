@@ -16,15 +16,15 @@ let indexRouter = require('./routes/index');
 
 //API Routers
 let airbnbRouter = require('./routes/airbnb');
-/*
-  let analyticsRouter = require('./routes/analytics);
+
+  let analyticsRouter = require('./routes/analytics');
   let geospatialRouter = require('./routes/geospatial');
   let mflixRouter = require('./routes/mflix');
   let restaurantsRouter = require('./routes/restaurants');
-  let suppliesRouter = require('./routes/supplies')
-  let trainingRouter = require('./routes/training')
-  let weatherRouter = require('./routes/weather) 
-*/
+  let suppliesRouter = require('./routes/supplies');
+  let trainingRouter = require('./routes/training');
+  let weatherRouter = require('./routes/weather');
+
 const app = express();
 
 // view engine setup
@@ -52,15 +52,15 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 //REST API Routes
 app.use('/api/v1/airbnb', airbnbRouter);
-/* Potential future API Endpoint
-app.use('/api/v1/analytics, analyticsRouter);
-app.use('/api/v1/geospatial, geospatialRouter);
+// Potential future API Endpoints
+app.use('/api/v1/analytics', analyticsRouter);
+app.use('/api/v1/geospatial', geospatialRouter);
 app.use('/api/v1/mflix', mflixRouter);
 app.use('/api/v1/restaurants', restaurantsRouter);
 app.use('/api/v1/supplies', suppliesRouter);
 app.use('/api/v1/training', trainingRouter)
-app.use('/api/v1/weather, weatherRouter)
-*/
+app.use('/api/v1/weather', weatherRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.render('404', {title: "Error 404 Occurred"})
