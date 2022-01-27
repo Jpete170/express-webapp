@@ -5,6 +5,7 @@ let router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express API' });
   //res.sendStatus(400).send("Page Loaded Successfully");
+  //res.sendFile(path.join(public, 'index.html'));
 });
 
 /* Base API Page*/
