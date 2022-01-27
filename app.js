@@ -8,6 +8,8 @@ const logger = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
 const body_parser = require('body-parser');
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa')
 require('dotenv').config(); // This middleware allows the server to access ".env" files locally.
 
 //Routes
@@ -43,6 +45,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(body_parser.json());;
 app.use(cors());
+
+const checkJWT = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: ``
+  }),
+  audience: `<API_IDENTIFIER>`,
+  issuer: '',
+  algorithms: ['RS256']
+})
+
+//app.use(checkJWT)
 
 //Routes
 app.use('/', indexRouter);
