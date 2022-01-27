@@ -35,7 +35,7 @@ router.route('/').get(function(req, res, next){
   //Return only the name of a place, will be used for a specific front end feature
   router.get('/name', function(req, res){
     let query ={
-      name
+    
     }
     dbConn
     .collection("listingsAndReviews")

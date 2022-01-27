@@ -3,14 +3,34 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const app = express();
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa')
 //Constants
 const helmet = require('helmet');
 const cors = require('cors');
 const body_parser = require('body-parser');
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa')
+
 require('dotenv').config(); // This middleware allows the server to access ".env" files locally.
+//Auth stuff
+//Authentication Handling
+let authURI = process.env.jwksUri;
+let authAudience = process.env.jwtAudience;
+let authIssuer = process.env.JWT_ISSUER;
+
+const checkJWT = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: authURI
+  }),
+  audience: authAudience,
+  issuer: authIssuer,
+  algorithms: ['RS256']
+})
+// const checkJWT = require(./auth/auth)
+//app.use(checkJWT)
 
 //Routes
 let indexRouter = require('./routes/index');
@@ -18,16 +38,14 @@ let indexRouter = require('./routes/index');
 
 //API Routers
 let airbnbRouter = require('./routes/airbnb');
+let analyticsRouter = require('./routes/analytics');
+let geospatialRouter = require('./routes/geospatial');
+let mflixRouter = require('./routes/mflix');
+let restaurantsRouter = require('./routes/restaurants');
+let suppliesRouter = require('./routes/supplies');
+let trainingRouter = require('./routes/training');
+let weatherRouter = require('./routes/weather');
 
-  let analyticsRouter = require('./routes/analytics');
-  let geospatialRouter = require('./routes/geospatial');
-  let mflixRouter = require('./routes/mflix');
-  let restaurantsRouter = require('./routes/restaurants');
-  let suppliesRouter = require('./routes/supplies');
-  let trainingRouter = require('./routes/training');
-  let weatherRouter = require('./routes/weather');
-
-const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,19 +64,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use(body_parser.json());;
 app.use(cors());
 
-const checkJWT = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: ``
-  }),
-  audience: `<API_IDENTIFIER>`,
-  issuer: '',
-  algorithms: ['RS256']
-})
-
-//app.use(checkJWT)
 
 //Routes
 app.use('/', indexRouter);
@@ -67,7 +72,7 @@ app.use('/', indexRouter);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 //REST API Routes
-app.use('/api/v1/airbnb', airbnbRouter);
+app.use('/api/v1/airbnb', checkJWT, airbnbRouter);
 // Potential future API Endpoints
 app.use('/api/v1/analytics', analyticsRouter);
 app.use('/api/v1/geospatial', geospatialRouter);
