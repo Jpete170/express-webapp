@@ -13,6 +13,12 @@ router.get('/api', function(req, res, next){
  // next()
 })
 
+router.get('/status', function(req, res, next){
+  res.send({
+    status: 'Online'
+  })
+})
+
 
 
 module.exports = router;

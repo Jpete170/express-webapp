@@ -29,14 +29,12 @@ const checkJWT = jwt({
   issuer: authIssuer,
   algorithms: ['RS256']
 })
-// const checkJWT = require(./auth/auth)
-//app.use(checkJWT)
 
 //Routes
 let indexRouter = require('./routes/index');
 //let usersRouter = require('./routes/users');
 
-//API Routers
+//API Routes
 let airbnbRouter = require('./routes/airbnb');
 let analyticsRouter = require('./routes/analytics');
 let geospatialRouter = require('./routes/geospatial');
