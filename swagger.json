@@ -1,7 +1,7 @@
 { "openapi":"3.0.0",
     "info":{
-        "title":"MongoDB Sample API Databses",
-        "description":"This is an example Express.js API which uses data from the sample datasets provided by MongoDB",
+        "title":"Listings Finder API",
+        "description":"This is an Express.js API that uses sample data from MongoDB",
         "version":"1.0.0",
         "termsOfService":"http://swagger.io/terms/",
         "contact":{"portfolio website":"https://jacksonpeters.dev/"},
@@ -12,22 +12,25 @@
     },
     "servers":[
         {
-            "url":"http://localhost:3000"
+            "url":"http://localhost:4000"
+        },
+        {
+            "url": "https://express-webapp-jpete.herokuapp.com/"
         }
     ],
     "basePath":"/api",
     "tags":[
         { 
             "name":"information",
-            "description":"General API description"
+            "description":"General API Information"
           },
           { 
             "name":"query",
-            "description":"API queries based on council and other available parameters."
+            "description":"API queries based on several parameters, such as item id"
           },
           { 
               "name":"updates",
-              "description":"Updates to Queensland Crimes Database information."
+              "description":"Updates to the MongoDB sample databases"
             }
     ],
     "paths":{
@@ -41,6 +44,32 @@
                 "responses":{
                     "200":{
                         "description":"successful operation"
+                    },
+                    "404":{
+                        "description":"Unsuccessful operation"
+                    },
+                    "401":{
+                        "description":"No Authorization Token"
+                    }
+                }
+            }
+        },
+        "/api/v1/airbnb/index":{
+            "get":{
+                "tags":["information"],
+                "summary":"Returns a sample of the first 10 records from the sample AirBnB Listing database.",
+                "description":"An API route  returning the first 10 AirBnB records",
+                "operationId":"AirBnBIndex",
+                "produces":["application/json"],
+                "responses":{
+                    "200":{
+                        "description":"successful operation"
+                    },
+                    "404":{
+                        "description":"Unsuccessful operation"
+                    },
+                    "401":{
+                        "description":"No Authorization Token"
                     }
                 }
             }
