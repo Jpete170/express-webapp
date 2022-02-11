@@ -29,9 +29,11 @@ const checkJWT = jwt({
   issuer: authIssuer,
   algorithms: ['RS256']
 })
+//app.use(checkJWT)
 
 //Routes
 let indexRouter = require('./routes/index');
+let statusRouter = require('./routes/status')
 //let usersRouter = require('./routes/users');
 
 //API Routes
@@ -71,6 +73,7 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 //REST API Routes
 app.use('/api/v1/airbnb', checkJWT, airbnbRouter);
+app.use('/api/v1/status', checkJWT,statusRouter);
 // Potential future API Endpoints
 app.use('/api/v1/analytics', analyticsRouter);
 app.use('/api/v1/geospatial', geospatialRouter);
