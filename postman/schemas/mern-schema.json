@@ -4,12 +4,17 @@
         "description":"This is an Express.js API that uses sample data from MongoDB",
         "version":"1.0.0",
         "termsOfService":"http://swagger.io/terms/",
-        "contact":{"portfolio website":"https://jacksonpeters.dev/"},
+        "contact":{
+            
+            },
         "license":{
             "name":"Apache 2.0",
             "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
+    "security": [
+        
+    ],
     "servers":[
         {
             "url":"http://localhost:4000"
@@ -18,20 +23,6 @@
             "url": "https://express-webapp-jpete.herokuapp.com/"
         }
     ],
-    "components":{
-        "securitySchema":{
-            "auth":{
-                "type":"http",
-                "description":"",
-                "scheme":"bearer",
-                "bearerFormat":"JWT"
-            }
-        }
-    },
-    "security":{
-        "auth":[]
-    },
-    "basePath":"/api",
     "tags":[
         { 
             "name":"information",
@@ -53,7 +44,7 @@
                 "summary":"Simple Information Page",
                 "description":"Very Basic API Page",
                 "operationId":"apiHome",
-                "produces":["text/html"],
+                
                 "responses":{
                     "200":{
                         "description":"successful operation"
@@ -73,7 +64,6 @@
                 "summary":"Returns a sample of the first 10 records from the sample AirBnB Listing database.",
                 "description":"An API route  returning the first 10 AirBnB records",
                 "operationId":"AirBnBIndex",
-                "produces":["application/json"],
                 "responses":{
                     "200":{
                         "description":"successful operation"
