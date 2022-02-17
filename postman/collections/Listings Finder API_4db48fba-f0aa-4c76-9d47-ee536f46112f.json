@@ -7,7 +7,7 @@
     },
     "item": [
         {
-            "name": "api",
+            "name": "API",
             "item": [
                 {
                     "name": "v1/airbnb",
@@ -250,7 +250,8 @@
                             ]
                         }
                     ],
-                    "id": "83ab84d5-25eb-4f24-84c6-211bdecbc93e"
+                    "id": "83ab84d5-25eb-4f24-84c6-211bdecbc93e",
+                    "description": "This is the schema for the AirBnB Route implemented to query the sample AirBnB mongodb dataset"
                 },
                 {
                     "name": "Simple Information Page",
