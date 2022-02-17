@@ -53,8 +53,6 @@ app.set('view engine', 'pug');
 
 //Assorted Middleware
 app.use(helmet());
-const swaggerUI = require("swagger-ui-express");
-const swaggerDocument = require('./swagger.json');;
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -69,7 +67,7 @@ app.use(cors());
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
 
 //REST API Routes
 app.use('/api/v1/airbnb', checkJWT, airbnbRouter);
