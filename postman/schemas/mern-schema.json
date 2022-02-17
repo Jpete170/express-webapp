@@ -1,92 +1,123 @@
-{ "openapi":"3.0.0",
-    "info":{
-        "title":"Listings Finder API",
-        "description":"This is an Express.js API that uses sample data from MongoDB",
-        "version":"1.0.0",
-        "termsOfService":"http://swagger.io/terms/",
-        "contact":{"portfolio website":"https://jacksonpeters.dev/"},
-        "license":{
-            "name":"Apache 2.0",
-            "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Listings Finder API",
+        "description": "This is an Express.js API that uses sample data from MongoDB",
+        "version": "1.0.0",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {},
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "servers":[
+    "security": [],
+    "servers": [
         {
-            "url":"http://localhost:4000"
+            "url": "http://localhost:4000"
         },
         {
             "url": "https://express-webapp-jpete.herokuapp.com/"
         }
     ],
-    "components":{
-        "securitySchema":{
-            "auth":{
-                "type":"http",
-                "description":"",
-                "scheme":"bearer",
-                "bearerFormat":"JWT"
-            }
+    "tags": [
+        {
+            "name": "information",
+            "description": "General API Information"
+        },
+        {
+            "name": "query",
+            "description": "API queries based on several parameters, such as item id"
+        },
+        {
+            "name": "updates",
+            "description": "Updates to the MongoDB sample databases"
         }
-    },
-    "security":{
-        "auth":[]
-    },
-    "basePath":"/api",
-    "tags":[
-        { 
-            "name":"information",
-            "description":"General API Information"
-          },
-          { 
-            "name":"query",
-            "description":"API queries based on several parameters, such as item id"
-          },
-          { 
-              "name":"updates",
-              "description":"Updates to the MongoDB sample databases"
-            }
     ],
-    "paths":{
-        "/api":{
-            "get":{
-                "tags":["information"],
-                "summary":"Simple Information Page",
-                "description":"Very Basic API Page",
-                "operationId":"apiHome",
-                "produces":["text/html"],
-                "responses":{
-                    "200":{
-                        "description":"successful operation"
+    "paths": {
+        "/api": {
+            "get": {
+                "tags": [
+                    "information"
+                ],
+                "summary": "Simple Information Page",
+                "description": "Very Basic API Page",
+                "operationId": "apiHome",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
                     },
-                    "404":{
-                        "description":"Unsuccessful operation"
+                    "404": {
+                        "description": "Unsuccessful operation"
                     },
-                    "401":{
-                        "description":"No Authorization Token"
+                    "401": {
+                        "description": "No Authorization Token"
                     }
                 }
             }
         },
-        "/api/v1/airbnb/index":{
-            "get":{
-                "tags":["information"],
-                "summary":"Returns a sample of the first 10 records from the sample AirBnB Listing database.",
-                "description":"An API route  returning the first 10 AirBnB records",
-                "operationId":"AirBnBIndex",
-                "produces":["application/json"],
-                "responses":{
-                    "200":{
-                        "description":"successful operation"
+        "/status": {
+            "get": {
+                "tags": [
+                    "information"
+                ],
+                "summary": "A basic function to return the server status",
+                "description": "A basic attempt to determine whether or not the server is either online or could be accessed",
+                "operationId": "getStatus",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
                     },
-                    "404":{
-                        "description":"Unsuccessful operation"
+                    "404": {
+                        "description": "Unsuccessful operation"
                     },
-                    "401":{
-                        "description":"No Authorization Token"
+                    "401": {
+                        "description": "No Authorization Token"
                     }
                 }
             }
-        }
+        },
+        "/api/v1/airbnb/index": {
+            "get": {
+                "tags": [
+                    "information"
+                ],
+                "summary": "Returns a sample of the first 10 records from the sample AirBnB Listing database.",
+                "description": "An API route  returning the first 10 AirBnB records",
+                "operationId": "AirBnBIndex",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "Unsuccessful operation"
+                    },
+                    "401": {
+                        "description": "No Authorization Token"
+                    }
+                }
+            }
+        },
+        "/api/v1/airbnb/": {
+            "get": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "This is an example of how the API dynamically creates pages basd on the _id field of the MongoDB Document",
+                "operationId": "airbnbPage",
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the document _id"
+                    },
+                    "404": {
+                        "description": "The requested document could not be found"
+                    },
+                    "401": {
+                        "description": "The requested document could not be accessed"
+                    }
+                }
+            }
+        },
+     
     }
-
 }
