@@ -14,7 +14,7 @@ const body_parser = require('body-parser');
 require('dotenv').config(); // This middleware allows the server to access ".env" files locally.
 //Auth stuff
 //Authentication Handling
-let authURI = process.env.jwksUri;
+let authURI = process.env.jwksURI;
 let authAudience = process.env.jwtAudience;
 let authIssuer = process.env.JWT_ISSUER;
 
