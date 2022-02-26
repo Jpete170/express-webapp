@@ -133,13 +133,16 @@
                         {
                             "name": "Returns a sample of the first 10 records from the sample AirBnB Listing database.",
                             "id": "4fb817ab-e8bc-4e98-8d3a-e14d983265a2",
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            },
                             "request": {
                                 "method": "GET",
                                 "header": [],
                                 "url": {
-                                    "raw": "{{baseUrl}}/api/v1/airbnb/index",
+                                    "raw": "{{baseUrl_prod}}/api/v1/airbnb/index",
                                     "host": [
-                                        "{{baseUrl}}"
+                                        "{{baseUrl_prod}}"
                                     ],
                                     "path": [
                                         "api",
@@ -366,15 +369,23 @@
         {
             "name": "A basic function to return the server status",
             "id": "9c2e6da8-f38f-41c0-8ab7-d54b537db5c2",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
             "request": {
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "{{baseUrl}}/status",
+                    "raw": "https://express-webapp-jpete.herokuapp.com/api/v1/status",
+                    "protocol": "https",
                     "host": [
-                        "{{baseUrl}}"
+                        "express-webapp-jpete",
+                        "herokuapp",
+                        "com"
                     ],
                     "path": [
+                        "api",
+                        "v1",
                         "status"
                     ]
                 },
@@ -471,11 +482,91 @@
             ]
         }
     ],
+    "auth": {
+        "type": "oauth2",
+        "oauth2": [
+            {
+                "key": "addTokenTo",
+                "value": "header",
+                "type": "string"
+            },
+            {
+                "key": "client_authentication",
+                "value": "header",
+                "type": "string"
+            },
+            {
+                "key": "audience",
+                "value": {
+                    "572ca41a-8e6d-48a1-8d53-bdcf08644381": "{{authAudience}}"
+                },
+                "type": "any"
+            },
+            {
+                "key": "scope",
+                "value": "read:contents",
+                "type": "string"
+            },
+            {
+                "key": "clientSecret",
+                "value": "{{clientSecret}}",
+                "type": "string"
+            },
+            {
+                "key": "clientId",
+                "value": "{{clientID}}",
+                "type": "string"
+            },
+            {
+                "key": "accessTokenUrl",
+                "value": "{{tokenURL}}",
+                "type": "string"
+            },
+            {
+                "key": "grant_type",
+                "value": "client_credentials",
+                "type": "string"
+            },
+            {
+                "key": "tokenName",
+                "value": "Auth0",
+                "type": "string"
+            }
+        ]
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "id": "5c721443-ba62-4bee-b977-d41176f53584",
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "id": "6acd32cb-d878-475f-86f9-4a82f18734c3",
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
     "variable": [
         {
-            "id": "dc6b2196-222a-4e91-8273-3fea43144cde",
-            "key": "baseUrl",
+            "id": "96167798-2870-4a15-b692-dda25b2fa1c1",
+            "key": "baseUrl_dev",
             "value": "http://localhost:4000",
+            "type": "string"
+        },
+        {
+            "id": "2a31986b-4656-4df0-8288-44d68b550ede",
+            "key": "baseUrl_prod",
+            "value": "https://express-webapp-jpete.herokuapp.com",
             "type": "string"
         }
     ]

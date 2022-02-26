@@ -103,7 +103,7 @@
                 "tags": [
                     "query"
                 ],
-                "summary": "This is an example of how the API dynamically creates pages basd on the _id field of the MongoDB Document",
+                "summary": "This is an example of how the API dynamically creates pages based on the _id field of the MongoDB Document",
                 "operationId": "airbnbPage",
                 "responses": {
                     "200": {
