@@ -10,7 +10,7 @@ const objID = require('mongodb').ObjectId;
 //This is the default landing page, that will be displayed 
 router.route('/index').get(function(req, res, next){
   let dbConn = dbo.getDB("sample_airbnb");
-  dbConn.collection("listingsAndReviews").find({}).limit(5).toArray(function(err, result){
+  dbConn.collection("listingsAndReviews").find({}).limit(20).toArray(function(err, result){
     if (err) throw err;
     res.json(result)
   })
