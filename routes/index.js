@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express API' });
+  res.render('index', { title: 'Listings Finder Express API' });
   //res.sendStatus(400).send("Page Loaded Successfully");
   //res.sendFile(path.join(public, 'index.html'));
 });
