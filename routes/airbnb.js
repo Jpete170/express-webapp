@@ -11,7 +11,13 @@ const objID = require('mongodb').ObjectId;
 router.route('/index').get(function(req, res, next){
   let dbConn = dbo.getDB("sample_airbnb");
   dbConn.collection("listingsAndReviews")
-    .find({})
+    .find({
+      weekly_price: {$exists: true},
+      monthly_price: {$exists: true},
+      cleaning_fee: {$exists: true},
+      extra_people: {$exists: true},
+      guests_included: {$exists: true}
+    })
     .limit(20)
     .skip(5)
     .toArray(function(err, result){
@@ -24,7 +30,13 @@ router.route('/index').get(function(req, res, next){
 router.get('/preview',function(req, res){
   const dbConn = dbo.getDB("sample_airbnb");
   dbConn.collection("listingsAndReviews")
-    .find({})
+    .find({
+      weekly_price: {$exists: true},
+      monthly_price: {$exists: true},
+      cleaning_fee: {$exists: true},
+      extra_people: {$exists: true},
+      guests_included: {$exists: true}
+    })
     .limit(5)
     .toArray(function(err, result){
     if (err) throw err;
