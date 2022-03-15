@@ -47,7 +47,10 @@ router.get('/preview',function(req, res){
     space: 1,
     address:{
       country: 1
-    }
+    },
+    images:{
+      picture_url: 1
+    },
   }
   dbConn.collection("listingsAndReviews")
     .find({
@@ -58,7 +61,7 @@ router.get('/preview',function(req, res){
       guests_included: {$exists: true}
     })
     .project(projection)
-    .limit(5)
+    .limit(6)
     .toArray(function(err, result){
     if (err) throw err;
     res.json(result)
