@@ -10,6 +10,17 @@ const objID = require('mongodb').ObjectId;
 //This is the default landing page, that will be displayed 
 router.route('/index').get(function(req, res, next){
   let dbConn = dbo.getDB("sample_airbnb");
+  const projection = {
+    _id: 1,
+    name: 1,
+    images:{
+      picture_url: 1
+    },
+    address:{
+      country: 1
+    },
+    summary: 1,
+  }
   dbConn.collection("listingsAndReviews")
     .find({
       weekly_price: {$exists: true},
@@ -18,6 +29,7 @@ router.route('/index').get(function(req, res, next){
       extra_people: {$exists: true},
       guests_included: {$exists: true}
     })
+    .project(projection)
     .limit(20)
     .skip(5)
     .toArray(function(err, result){
@@ -26,9 +38,17 @@ router.route('/index').get(function(req, res, next){
   })
    // next()
 });
-  
+
+//Used in the 'Index' page of the React App.
 router.get('/preview',function(req, res){
   const dbConn = dbo.getDB("sample_airbnb");
+  const projection = {
+    name: 1,
+    space: 1,
+    address:{
+      country: 1
+    }
+  }
   dbConn.collection("listingsAndReviews")
     .find({
       weekly_price: {$exists: true},
@@ -37,6 +57,7 @@ router.get('/preview',function(req, res){
       extra_people: {$exists: true},
       guests_included: {$exists: true}
     })
+    .project(projection)
     .limit(5)
     .toArray(function(err, result){
     if (err) throw err;
