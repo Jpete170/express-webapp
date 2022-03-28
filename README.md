@@ -12,7 +12,7 @@ I used [Postman](https://www.postman.com/) and [Insomnia](https://insomnia.rest/
 
 ## Web Hosting
 
-This web server is hosted using [Heroku](https://heroku.com), and can be accessed through this [link](); although it's rather basic in terms of UI/UX Design.
+This web server is hosted using [Heroku](https://heroku.com), and can be accessed through this [link](https://flask-app-portfolio-jpete.herokuapp.com/); although it's rather basic in terms of UI/UX Design.
 
 ## Technologies
 
