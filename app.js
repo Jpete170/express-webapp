@@ -38,13 +38,7 @@ let statusRouter = require('./routes/status')
 
 //API Routes
 let airbnbRouter = require('./routes/airbnb');
-let analyticsRouter = require('./routes/analytics');
-let geospatialRouter = require('./routes/geospatial');
-let mflixRouter = require('./routes/mflix');
-let restaurantsRouter = require('./routes/restaurants');
-let suppliesRouter = require('./routes/supplies');
-let trainingRouter = require('./routes/training');
-let weatherRouter = require('./routes/weather');
+
 
 
 // view engine setup
@@ -65,21 +59,14 @@ app.use(cors());
 
 //Routes
 app.use('/', indexRouter);
-//app.use('/users', usersRouter);
+
 
 
 
 //REST API Routes
 app.use('/api/v1/airbnb', checkJWT, airbnbRouter);
 app.use('/api/v1/status', checkJWT,statusRouter);
-// Potential future API Endpoints
-app.use('/api/v1/analytics', analyticsRouter);
-app.use('/api/v1/geospatial', geospatialRouter);
-app.use('/api/v1/mflix', mflixRouter);
-app.use('/api/v1/restaurants', restaurantsRouter);
-app.use('/api/v1/supplies', suppliesRouter);
-app.use('/api/v1/training', trainingRouter)
-app.use('/api/v1/weather', weatherRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
