@@ -12,7 +12,8 @@ const client = new prisma.PrismaClient();
 
 /* The base AirBnB Sample dataset page*/
 //This is the default landing page, that will be displayed 
-router.route('/index').get(function(req, res, next){
+router.route('/index').get( async function(req, res, next){
+  
   let dbConn = dbo.getDB("sample_airbnb");
   const projection = {
     _id: 1,
@@ -40,7 +41,20 @@ router.route('/index').get(function(req, res, next){
     if (err) throw err;
     res.json(result)
   })
-   // next()
+   /*
+  await client.$connect();
+  const listings = await client.listingsAndReviews.findMany({
+    where:{
+      weekly_price: true,
+      monthly_price: true,
+      cleaning_fee: true,
+      extra_people: true,
+      guests_included: true,
+    },
+   
+  });
+  res.json(listings)
+  await client.$disconnect()*/
 });
 
 //Used in the 'Index' page of the React App.
