@@ -83,7 +83,7 @@ router.get('/:id', function(req, res){
 })
 /**This following section will hold code related for searching and querying the MongoDB database from the frontend React app */
 //search function for the "name" field
-router.get('/search?', function(req, res){
+router.get('/search?name=:name', function(req, res){
   const dbConn = dbo.getDB("sample_airbnb");
   const findName = req.params.name;
   dbConn.collection("listingsAndReviews").find({
@@ -99,7 +99,11 @@ router.get('/search?', function(req, res){
 //Filter function for limiting page results shown
 router.get('/filter?results=:limit', function(req,res){
   const dbConn = dbo.getDB("sample_airbnb");
-  dbConn.collection("listingsAndReviews").find({}).limit(req.params.limit).toArray(function(err, result){
+  dbConn.collection("listingsAndReviews").find({
+    //potential future filtering options
+  })
+  .limit(req.params.limit)
+  .toArray(function(err, result){
     if (err) throw err;
     res.json(result)
   })
