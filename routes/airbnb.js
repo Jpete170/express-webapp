@@ -4,6 +4,10 @@ let router = express.Router();
 const dbo = require('../database/db')
 const objID = require('mongodb').ObjectId;
 
+//import {PrismaClient} from '@prisma/client';
+const prisma = require("@prisma/client")
+const client = new prisma.PrismaClient();
+
 
 
 /* The base AirBnB Sample dataset page*/
@@ -97,7 +101,7 @@ router.get('/search?name=:name', function(req, res){
 
 /**The following section will hold code for filtering the MongoDB search results based on a variety of options*/
 //Filter function for limiting page results shown
-router.get('/filter?results=:limit', function(req,res){
+router.get('/filter?results=:limit', async function(req,res){
   const dbConn = dbo.getDB("sample_airbnb");
   dbConn.collection("listingsAndReviews").find({
     //potential future filtering options
@@ -107,6 +111,7 @@ router.get('/filter?results=:limit', function(req,res){
     if (err) throw err;
     res.json(result)
   })
+  
 })
 
 module.exports = router
