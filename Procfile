@@ -1,0 +1,1 @@
+web: npx prisma generate && yarn run start

@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type ListingsAndReviewsAddress {
+  country         String
+  country_code    String
+  government_area String
+  location        ListingsAndReviewsAddressLocation
+  market          String
+  street          String
+  suburb          String
+}
+
+type ListingsAndReviewsAddressLocation {
+  coordinates       Float[]
+  is_location_exact Boolean
+  type              String
+}
+
+type ListingsAndReviewsAvailability {
+  availability_30  Int
+  availability_365 Int
+  availability_60  Int
+  availability_90  Int
+}
+
+type ListingsAndReviewsHost {
+  host_about                String
+  host_has_profile_pic      Boolean
+  host_id                   String
+  host_identity_verified    Boolean
+  host_is_superhost         Boolean
+  host_listings_count       Int
+  host_location             String
+  host_name                 String
+  host_neighbourhood        String
+  host_picture_url          String
+  host_response_rate        Int?
+  host_response_time        String?
+  host_thumbnail_url        String
+  host_total_listings_count Int
+  host_url                  String
+  host_verifications        String[]
+}
+
+type ListingsAndReviewsImages {
+  medium_url     String
+  picture_url    String
+  thumbnail_url  String
+  xl_picture_url String
+}
+
+type ListingsAndReviewsReviewScores {
+  review_scores_accuracy      Int?
+  review_scores_checkin       Int?
+  review_scores_cleanliness   Int?
+  review_scores_communication Int?
+  review_scores_location      Int?
+  review_scores_rating        Int?
+  review_scores_value         Int?
+}
+
+type ListingsAndReviewsReviews {
+  id            String   @map("_id")
+  comments      String?
+  date          DateTime @db.Date
+  listing_id    String
+  reviewer_id   String
+  reviewer_name String?
+}
+
+model listingsAndReviews {
+  id                    String                         @id @map("_id")
+  access                String
+  accommodates          Int
+  address               ListingsAndReviewsAddress
+  amenities             String[]
+  availability          ListingsAndReviewsAvailability
+  bathrooms             Unsupported("Decimal128")
+  bed_type              String
+  bedrooms              Int?
+  beds                  Int?
+  calendar_last_scraped DateTime                       @db.Date
+  cancellation_policy   String
+  cleaning_fee          Unsupported("Decimal128")?
+  description           String
+  extra_people          Unsupported("Decimal128")
+  first_review          DateTime?                      @db.Date
+  guests_included       Unsupported("Decimal128")
+  host                  ListingsAndReviewsHost
+  house_rules           String
+  images                ListingsAndReviewsImages
+  interaction           String
+  last_review           DateTime?                      @db.Date
+  last_scraped          DateTime                       @db.Date
+  listing_url           String
+  maximum_nights        String
+  minimum_nights        String
+  monthly_price         Unsupported("Decimal128")?
+  name                  String
+  neighborhood_overview String
+  notes                 String
+  number_of_reviews     Int
+  price                 Unsupported("Decimal128")
+  property_type         String
+  review_scores         ListingsAndReviewsReviewScores
+  reviews               ListingsAndReviewsReviews[]
+  reviews_per_month     Int?
+  room_type             String
+  security_deposit      Unsupported("Decimal128")?
+  space                 String
+  summary               String
+  transit               String
+  weekly_price          Unsupported("Decimal128")?
+
+  @@index([property_type, room_type, beds], map: "property_type_1_room_type_1_beds_1")
+  @@index([name], map: "name_1")
+  @@index([address.location], map: "address.location_2dsphere")
+}
