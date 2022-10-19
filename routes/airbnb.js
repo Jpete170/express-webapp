@@ -1,5 +1,7 @@
 let express = require('express')
 let router = express.Router();
+//const cors = require('cors');
+
 
 const dbo = require('../database/db')
 const objID = require('mongodb').ObjectId;
@@ -54,7 +56,7 @@ router.route('/index').get( async function(req, res, next){
 });
 
 //Used in the 'Index' page of the React App.
-router.get('/preview',function(req, res){
+router.get('/preview', function(req, res){
   const dbConn = dbo.getDB("sample_airbnb");
   const projection = {
     name: 1,
