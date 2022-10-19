@@ -6,7 +6,7 @@ const client = new MongoClient(DB,{
 })
 
 let _db; //instantiate database variable before exporting it.
-
+ 
 module.exports = {
     serverConnection: function(callback){ // Use for initial database connection when app is started / connected
         client.connect(function(err, db){

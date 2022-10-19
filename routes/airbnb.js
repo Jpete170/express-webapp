@@ -4,10 +4,6 @@ let router = express.Router();
 const dbo = require('../database/db')
 const objID = require('mongodb').ObjectId;
 
-//import {PrismaClient} from '@prisma/client';
-const prisma = require("@prisma/client")
-const client = new prisma.PrismaClient();
-
 
 
 /* The base AirBnB Sample dataset page*/

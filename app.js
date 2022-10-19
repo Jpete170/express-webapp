@@ -31,7 +31,10 @@ const checkJWT = jwt({
   issuer: authIssuer,
   algorithms: ['RS256']
 })
-//app.use(checkJWT)
+app.use(checkJWT)
+
+
+//app.options('*', cors());
 
 //Routes
 let indexRouter = require('./routes/index');
@@ -62,12 +65,9 @@ app.use(cors());
 //Routes
 app.use('/', indexRouter);
 
-
-
-
 //REST API Routes
-app.use('/api/v1/airbnb', checkJWT, airbnbRouter);
-app.use('/api/v1/status', checkJWT,statusRouter);
+app.use('/api/v1/airbnb', airbnbRouter);
+app.use('/api/v1/status',statusRouter);
 
 
 // catch 404 and forward to error handler

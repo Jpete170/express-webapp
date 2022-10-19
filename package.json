@@ -24,7 +24,6 @@
     "jwks-rsa": "^2.0.5",
     "mongodb": "^4.3.0",
     "morgan": "~1.9.1",
-    "prisma": "^3.14.0",
     "pug": "^3.0.2"
   },
   "devDependencies": {
