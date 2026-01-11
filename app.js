@@ -4,8 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const app = express();
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa')
+// const jwt = require('express-jwt');
+// const jwksRsa = require('jwks-rsa')
 //Constants
 const helmet = require('helmet');
 const cors = require('cors');
@@ -20,17 +20,17 @@ let authURI = process.env.jwksURI;
 let authAudience = process.env.jwtAudience;
 let authIssuer = process.env.JWT_ISSUER;
 
-const checkJWT = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: authURI
-  }),
-  audience: authAudience,
-  issuer: authIssuer,
-  algorithms: ['RS256']
-})
+// const checkJWT = jwt({
+//   secret: jwksRsa.expressJwtSecret({
+//     cache: true,
+//     rateLimit: true,
+//     jwksRequestsPerMinute: 5,
+//     jwksUri: authURI
+//   }),
+//   audience: authAudience,
+//   issuer: authIssuer,
+//   algorithms: ['RS256']
+// })
 
 //app.use(checkJWT)
 
@@ -64,15 +64,15 @@ const corsOptions ={
   optionsSuccessStatus: 200,
 }
 
-//app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 
 //Routes
 app.use('/', indexRouter);
 
 //REST API Routes
-app.use('/api/v1/airbnb', cors(), checkJWT, airbnbRouter);
-app.use('/api/v1/status', checkJWT, statusRouter);
+app.use('/api/v1/airbnb', cors(), airbnbRouter);
+app.use('/api/v1/status', statusRouter);
 
 
 // catch 404 and forward to error handler
@@ -91,5 +91,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+const port = "3000"
+app.listen(port, ()=>{
+  console.log(`Listening on port ${port}`);
+})
 module.exports = app;

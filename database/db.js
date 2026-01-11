@@ -5,6 +5,8 @@ const client = new MongoClient(DB,{
     useUnifiedTopology: true
 })
 
+
+
 let _db; //instantiate database variable before exporting it.
  
 module.exports = {
